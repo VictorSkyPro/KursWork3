@@ -4,11 +4,22 @@ from pprint import pprint
 def display_info(operation):
     """Формирует вывод данных в удобном пользователю формате"""
 
-    out = f"{operation['date']} {operation['description']} \n" \
+    out = f"{date_dd_mm_eeee(operation['date'])} {operation['description']} \n" \
           f" {operation['from']} -> {operation['to']} \n " \
           f"{operation['operationAmount']['amount']} {operation['operationAmount']['currency']['name']} \n"
 
     print(out)
+
+def date_dd_mm_eeee(date):
+    """Формирует удобный формат даты.
+    Пример: 2019-12-07 -> 07.12.2019.
+    1) выбирает первые 10 символов даты.
+    2) разделяет дату по символу '-'.
+    3) переворачивает элементы списка.
+    4) объединяет элементы через символ '.'
+     """
+    return '.'.join(date[:10].split('-')[::-1])
+
 
 def main():
     """
