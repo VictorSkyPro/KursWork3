@@ -5,7 +5,7 @@ def display_info(operation):
     """Формирует вывод данных в удобном пользователю формате"""
 
     out = f"{date_dd_mm_eeee(operation['date'])} {operation['description']} \n" \
-          f" {operation['from']} -> {operation['to']} \n " \
+          f" {card_stels(operation['from'])} -> {card_stels(operation['to'])} \n " \
           f"{operation['operationAmount']['amount']} {operation['operationAmount']['currency']['name']} \n"
 
     print(out)
@@ -19,6 +19,23 @@ def date_dd_mm_eeee(date):
     4) объединяет элементы через символ '.'
      """
     return '.'.join(date[:10].split('-')[::-1])
+
+def card_stels(card_data:str):
+    """Скрывает часть номера карты. Видны первые 6 цифр и последние 4."""
+    if card_data.startswith('MasterCard') or card_data.startswith('Visa Classic') or card_data.startswith('Visa Gold') or card_data.startswith('Maestro'):
+        card_data = card_data.split()
+        card_number = card_data[-1]
+        stels = card_number[:6] + '*' * 2 + card_number[-4:]
+
+        return ' '.join((card_data)[:-1] + [stels])
+
+    elif card_data.startswith('Счет'):
+        card_data = card_data.split()
+        card_number = card_data[-1]
+        stels = '*' * 2 + card_number[-4:]
+
+        return ' '.join((card_data)[:-1] + [stels])
+
 
 
 def main():
