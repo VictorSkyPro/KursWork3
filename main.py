@@ -22,7 +22,7 @@ def date_dd_mm_eeee(date):
 
 def card_stels(card_data:str):
     """Скрывает часть номера карты. Видны первые 6 цифр и последние 4."""
-    if card_data.startswith('MasterCard') or card_data.startswith('Visa Classic') or card_data.startswith('Visa Gold') or card_data.startswith('Maestro'):
+    if card_data.startswith('MasterCard') or card_data.startswith('Visa Classic') or card_data.startswith('Visa Gold') or card_data.startswith('Maestro') or card_data.startswith('МИР') or card_data.startswith('Visa Platinum'):
         card_data = card_data.split()
         card_number = card_data[-1]
         stels = card_number[:6] + '*' * 2 + card_number[-4:]
@@ -59,5 +59,5 @@ def main():
     for operation in data[:5]:
         display_info(operation)
 
-
-main()
+if __name__ == '__main__':
+    main()
